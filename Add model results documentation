@@ -1,0 +1,75 @@
+# Model Results — AI Phishing Classifier
+
+## Training Configuration
+
+- Dataset: UCI SMS Spam Collection
+- Total samples: 5,572
+- Training set: 4,457 (80%)
+- Test set: 1,115 (20%)
+- TF-IDF features: 5,000
+- N-gram range: unigrams and bigrams (1,2)
+- Random state: 42
+- Stratified split: yes
+
+## Model Performance
+
+### Naive Bayes
+- Accuracy: 0.977
+- Precision: 0.962
+- Recall: 0.859
+- F1 Score: 0.908
+
+### Logistic Regression
+- Accuracy: 0.969
+- Precision: 0.983
+- Recall: 0.779
+- F1 Score: 0.869
+
+### Random Forest
+- Accuracy: 0.978
+- Precision: 1.000
+- Recall: 0.832
+- F1 Score: 0.908
+
+## Best Model: Random Forest
+
+Selected by F1 score as the primary metric for imbalanced 
+security classification data.
+
+## Confusion Matrix Breakdown
+
+- True Negatives (legitimate correctly classified): 966
+- False Positives (legitimate flagged as phishing): 0
+- False Negatives (phishing missed): 25
+- True Positives (phishing correctly caught): 124
+
+## False Negative Analysis
+
+Messages the model missed were predominantly:
+- BEC-style messages using professional language
+- Short messages with no obvious phishing keywords
+- Messages without urgency language or credential requests
+
+This demonstrates the limitation of keyword-based NLP for 
+sophisticated social engineering attacks and the continued 
+need for human-in-the-loop validation in SOC triage workflows.
+
+## Top 10 Phishing Indicator Words
+
+1. txt (0.0374)
+2. call (0.0277)
+3. free (0.0253)
+4. claim (0.0243)
+5. mobil (0.0193)
+6. repli (0.0186)
+7. text (0.0175)
+8. servic (0.0160)
+9. prize (0.0154)
+10. win (0.0123)
+
+## MITRE ATT&CK Mapping
+
+T1566 — Phishing — primary detection target
+T1566.001 — Spearphishing Attachment
+T1566.002 — Spearphishing Link
+T1598 — Phishing for Information / credential harvesting
